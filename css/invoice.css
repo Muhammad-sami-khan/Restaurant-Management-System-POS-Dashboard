@@ -1,0 +1,118 @@
+/* ============================================
+   Invoice / Print Styles
+   ============================================ */
+
+/* Invoice modal */
+#modal-invoice {
+  max-width: 420px;
+}
+
+#invoice-printable {
+  font-size: 13px;
+  color: var(--gray-800);
+}
+
+.invoice-header {
+  text-align: center;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.invoice-restaurant-name {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 4px;
+}
+
+.invoice-restaurant-info {
+  font-size: 12px;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+
+/* Order meta grid */
+.invoice-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 12px;
+  margin-bottom: 14px;
+}
+
+.invoice-meta-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: var(--gray-400);
+  margin-bottom: 2px;
+}
+
+.invoice-meta-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-800);
+}
+
+/* Note */
+.invoice-note-wrap {
+  font-size: 12px;
+  color: var(--gray-500);
+  margin: 8px 0;
+  padding: 8px;
+  background: var(--gray-50);
+  border-radius: 4px;
+  border-left: 3px solid var(--gray-300);
+}
+
+/* Totals */
+.invoice-totals {
+  margin-top: 10px;
+}
+
+.invoice-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--gray-500);
+  padding: 4px 0;
+}
+
+.invoice-total-row.grand {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gray-900);
+  border-top: 2px solid var(--gray-200);
+  margin-top: 6px;
+  padding-top: 9px;
+}
+
+/* Footer */
+.invoice-footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--gray-400);
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--gray-100);
+}
+
+/* ---- Print Media Query ---- */
+@media print {
+  body * { visibility: hidden; }
+
+  #invoice-printable,
+  #invoice-printable * { visibility: visible; }
+
+  #invoice-printable {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+  }
+}
