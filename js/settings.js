@@ -54,6 +54,67 @@ function saveSettings(e) {
   showToast('Settings saved successfully!');
 }
 
+// Export entire restaurant database to a JSON file
+function exportBackup() {
+  const backupData = {
+    appName:    'Smart Restaurant POS',
+    version:    '1.0',
+    exportedAt: new Date().toISOString(),
+    menu:       Storage.get('rms_menu') || [],
+    tables:     Storage.get('rms_tables') || [],
+    orders:     Storage.get('rms_orders') || [],
+    settings:   Storage.get('rms_settings') || {},
+  };
+
+  const jsonStr  = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(backupData, null, 2));
+  const dateStr  = new Date().toISOString().slice(0, 10);
+  const filename = `restaurant-pos-backup-${dateStr}.json`;
+
+  const downloadAnchor = document.createElement('a');
+  downloadAnchor.setAttribute('href', jsonStr);
+  downloadAnchor.setAttribute('download', filename);
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  downloadAnchor.remove();
+
+  showToast('Database backup downloaded!');
+}
+
+// Import restaurant database from a JSON file
+function importBackup(e) {
+  const file = e.target.files && e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    try {
+      const data = JSON.parse(event.target.result);
+      if (!data || (!Array.isArray(data.menu) && !Array.isArray(data.tables))) {
+        throw new Error('Invalid backup file structure.');
+      }
+
+      if (confirm('Importing this backup will overwrite your current data with the backup contents. Continue?')) {
+        if (data.menu)     Storage.set('rms_menu', data.menu);
+        if (data.tables)   Storage.set('rms_tables', data.tables);
+        if (data.orders)   Storage.set('rms_orders', data.orders);
+        if (data.settings) Storage.set('rms_settings', data.settings);
+
+        loadSettings();
+        const sidebarBrand = document.getElementById('sidebar-restaurant-name');
+        if (sidebarBrand && data.settings && data.settings.restaurantName) {
+          sidebarBrand.textContent = data.settings.restaurantName;
+        }
+
+        showToast('Backup restored successfully!');
+      }
+    } catch (err) {
+      alert('Failed to import backup: ' + err.message);
+    }
+    e.target.value = '';
+  };
+  reader.readAsText(file);
+}
+
 // reset defaults button action
 function resetAllData() {
   const confirmed = confirm(

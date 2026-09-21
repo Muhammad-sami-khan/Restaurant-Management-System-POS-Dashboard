@@ -1,29 +1,33 @@
 /* ============================================
-   Invoice / Print Styles
+   Invoice / Thermal Print Styles — Commercial POS
    ============================================ */
 
 /* Invoice modal */
 #modal-invoice {
-  max-width: 420px;
+  max-width: 440px;
 }
 
 #invoice-printable {
   font-size: 13px;
   color: var(--gray-800);
+  background: #FFFFFF;
+  padding: 10px 6px;
+  font-family: var(--font);
 }
 
 .invoice-header {
   text-align: center;
-  padding-bottom: 14px;
-  margin-bottom: 14px;
-  border-bottom: 1px solid var(--gray-200);
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px dashed var(--gray-300);
 }
 
 .invoice-restaurant-name {
-  font-size: 19px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 800;
   color: var(--gray-900);
   margin-bottom: 4px;
+  letter-spacing: -0.3px;
 }
 
 .invoice-restaurant-info {
@@ -37,59 +41,102 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  background: var(--gray-50);
+  background: #F8FAFC;
   border: 1px solid var(--gray-200);
   border-radius: var(--radius);
-  padding: 12px;
-  margin-bottom: 14px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
 }
 
 .invoice-meta-label {
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
   color: var(--gray-400);
   margin-bottom: 2px;
 }
 
 .invoice-meta-value {
   font-size: 13px;
-  font-weight: 500;
-  color: var(--gray-800);
+  font-weight: 700;
+  color: var(--gray-900);
 }
 
 /* Note */
 .invoice-note-wrap {
   font-size: 12px;
-  color: var(--gray-500);
-  margin: 8px 0;
-  padding: 8px;
-  background: var(--gray-50);
-  border-radius: 4px;
-  border-left: 3px solid var(--gray-300);
+  color: var(--gray-600);
+  margin: 10px 0;
+  padding: 8px 12px;
+  background: #FFFBEB;
+  border-radius: 6px;
+  border-left: 3px solid var(--warning);
 }
 
 /* Totals */
 .invoice-totals {
-  margin-top: 10px;
+  margin-top: 14px;
+  border-top: 1px dashed var(--gray-300);
+  padding-top: 10px;
 }
 
 .invoice-total-row {
   display: flex;
   justify-content: space-between;
   font-size: 13px;
-  color: var(--gray-500);
+  color: var(--gray-600);
   padding: 4px 0;
 }
 
 .invoice-total-row.grand {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 800;
   color: var(--gray-900);
-  border-top: 2px solid var(--gray-200);
-  margin-top: 6px;
-  padding-top: 9px;
+  border-top: 2px solid var(--gray-900);
+  margin-top: 8px;
+  padding-top: 10px;
+}
+
+.invoice-total-row.grand span:last-child {
+  color: var(--primary);
+}
+
+/* Simulated Barcode */
+.invoice-barcode-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 16px 0 6px;
+  gap: 4px;
+}
+
+.invoice-barcode-bars {
+  height: 36px;
+  width: 180px;
+  background: repeating-linear-gradient(
+    90deg,
+    #0F172A,
+    #0F172A 2px,
+    transparent 2px,
+    transparent 4px,
+    #0F172A 4px,
+    #0F172A 7px,
+    transparent 7px,
+    transparent 9px,
+    #0F172A 9px,
+    #0F172A 10px,
+    transparent 10px,
+    transparent 13px
+  );
+  border-radius: 2px;
+}
+
+.invoice-barcode-num {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--gray-500);
+  letter-spacing: 2px;
 }
 
 /* Footer */
@@ -97,9 +144,10 @@
   text-align: center;
   font-size: 12px;
   color: var(--gray-400);
-  margin-top: 18px;
+  margin-top: 16px;
   padding-top: 12px;
-  border-top: 1px solid var(--gray-100);
+  border-top: 1px dashed var(--gray-300);
+  line-height: 1.5;
 }
 
 /* ---- Print Media Query ---- */
@@ -111,8 +159,9 @@
 
   #invoice-printable {
     position: fixed;
-    top: 20px;
-    left: 20px;
-    right: 20px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
   }
 }

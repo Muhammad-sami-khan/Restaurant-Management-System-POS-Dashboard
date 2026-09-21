@@ -125,8 +125,15 @@ function openMenuModal(itemId) {
 
   document.getElementById('menu-modal-title').textContent = itemId ? 'Edit Menu Item' : 'Add Menu Item';
 
+  // Populate category datalist with existing unique categories
+  const menu = Storage.get('rms_menu') || [];
+  const datalist = document.getElementById('menu-categories-datalist');
+  if (datalist) {
+    const uniqueCats = [...new Set(menu.map(i => i.category))];
+    datalist.innerHTML = uniqueCats.map(cat => `<option value="${cat}"></option>`).join('');
+  }
+
   if (itemId) {
-    const menu = Storage.get('rms_menu') || [];
     const item = menu.find(m => m.id === itemId);
     if (!item) return;
 

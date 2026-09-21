@@ -4,8 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
     content="Smart Restaurant POS & Management Dashboard - Fast, clean and responsive point of sale system with offline LocalStorage support." />
@@ -120,7 +119,7 @@
 
         <div class="nav-section-label">System</div>
 
-        <a class="nav-link" data-page="footers">
+        <a class="nav-link" data-page="settings">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="3"></circle>
             <path
@@ -132,8 +131,11 @@
       </nav>
 
       <div class="sidebar-footer">
-        <div>Smart Restaurant POS v1.0</div>
-        <div>POS &amp; Management System</div>
+        <div class="sidebar-terminal-status">
+          <span class="status-dot-pulse"></span>
+          <span>Terminal #01 · Online</span>
+        </div>
+        <div style="font-size:10.5px; color:rgba(255,255,255,0.3); margin-top:2px;">POS &amp; Restaurant Cloud</div>
       </div>
     </aside>
 
@@ -160,12 +162,12 @@
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-icon stat-icon-blue">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                 <line x1="12" y1="1" x2="12" y2="23"></line>
                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
               </svg>
             </div>
-            <div>
+            <div class="stat-content">
               <div class="stat-label">Total Revenue</div>
               <div class="stat-value" id="stat-revenue">PKR 0</div>
             </div>
@@ -173,12 +175,12 @@
 
           <div class="stat-card">
             <div class="stat-icon stat-icon-green">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>
               </svg>
             </div>
-            <div>
+            <div class="stat-content">
               <div class="stat-label">Orders Today</div>
               <div class="stat-value" id="stat-orders">0</div>
             </div>
@@ -186,14 +188,14 @@
 
           <div class="stat-card">
             <div class="stat-icon stat-icon-amber">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                 <path d="M4 18v3"></path>
                 <path d="M20 18v3"></path>
                 <path d="M4 14h16"></path>
                 <path d="M2 8h20v6H2z"></path>
               </svg>
             </div>
-            <div>
+            <div class="stat-content">
               <div class="stat-label">Occupied Tables</div>
               <div class="stat-value" id="stat-tables">0 / 0</div>
             </div>
@@ -201,12 +203,12 @@
 
           <div class="stat-card">
             <div class="stat-icon stat-icon-red">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
             </div>
-            <div>
+            <div class="stat-content">
               <div class="stat-label">Active Orders</div>
               <div class="stat-value" id="stat-pending">0</div>
             </div>
@@ -216,40 +218,95 @@
         <!-- Dashboard Charts & Quick Actions -->
         <div class="dashboard-grid">
           <div class="chart-card">
-            <div class="chart-title">Weekly Sales Trend (PKR)</div>
-            <svg id="weekly-chart" height="160"></svg>
+            <div class="chart-header">
+              <div>
+                <div class="chart-title">Weekly Revenue Trend</div>
+                <div class="chart-subtitle">Delivered sales volume over the last 7 days</div>
+              </div>
+              <div class="chart-legend-badge">
+                <span class="chart-legend-dot"></span>
+                <span>Revenue (PKR)</span>
+              </div>
+            </div>
+            <svg id="weekly-chart" height="170"></svg>
           </div>
 
-          <div class="card">
-            <div class="chart-title">Quick Actions</div>
+          <div class="quick-actions-card">
+            <div class="quick-actions-title">Quick Navigation</div>
             <div class="quick-actions">
-              <button class="btn btn-secondary" onclick="navigateTo('pos')">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="9" cy="21" r="1"></circle>
-                  <circle cx="20" cy="21" r="1"></circle>
-                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              <div class="quick-action-item" onclick="navigateTo('pos')">
+                <div class="quick-action-left">
+                  <div class="quick-action-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="9" cy="21" r="1"></circle>
+                      <circle cx="20" cy="21" r="1"></circle>
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                  </div>
+                  <div class="quick-action-text">
+                    <span class="quick-action-title">POS Terminal</span>
+                    <span class="quick-action-desc">Take orders, bill &amp; print invoice</span>
+                  </div>
+                </div>
+                <svg class="quick-action-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
-                Open POS Cashier Screen
-              </button>
-              <button class="btn btn-secondary" onclick="navigateTo('orders')">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              </div>
+
+              <div class="quick-action-item" onclick="navigateTo('orders')">
+                <div class="quick-action-left">
+                  <div class="quick-action-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                  </div>
+                  <div class="quick-action-text">
+                    <span class="quick-action-title">Kitchen KDS &amp; Orders</span>
+                    <span class="quick-action-desc">Live ticket display &amp; food prep</span>
+                  </div>
+                </div>
+                <svg class="quick-action-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
-                View & Manage Orders
-              </button>
-              <button class="btn btn-secondary" onclick="navigateTo('tables')">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M4 14h16"></path>
+              </div>
+
+              <div class="quick-action-item" onclick="navigateTo('tables')">
+                <div class="quick-action-left">
+                  <div class="quick-action-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M4 14h16"></path>
+                      <path d="M2 8h20v6H2z"></path>
+                    </svg>
+                  </div>
+                  <div class="quick-action-text">
+                    <span class="quick-action-title">Floor Tables</span>
+                    <span class="quick-action-desc">Monitor occupancy &amp; seating</span>
+                  </div>
+                </div>
+                <svg class="quick-action-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
-                Check Table Status
-              </button>
-              <button class="btn btn-secondary" onclick="navigateTo('menu')">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
+              </div>
+
+              <div class="quick-action-item" onclick="navigateTo('analytics')">
+                <div class="quick-action-left">
+                  <div class="quick-action-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="18" y1="20" x2="18" y2="10"></line>
+                      <line x1="12" y1="20" x2="12" y2="4"></line>
+                      <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                  </div>
+                  <div class="quick-action-text">
+                    <span class="quick-action-title">Sales Analytics</span>
+                    <span class="quick-action-desc">Payment mix &amp; dish performance</span>
+                  </div>
+                </div>
+                <svg class="quick-action-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
-                Add Menu Items
-              </button>
+              </div>
             </div>
           </div>
 
@@ -281,11 +338,15 @@
       </section>
 
       <!-- ==================== 2. POS PAGE ==================== -->
-      <section id="page-pos" class="page">
-        <div class="page-header">
-          <div>
-            <h1 class="page-title">Point of Sale (POS)</h1>
-            <p class="page-subtitle">Select items to build an order and send to kitchen/checkout</p>
+      <!-- ==================== 2. POS PAGE ==================== -->
+      <section id="page-pos" class="page pos-screen">
+        <div class="pos-topbar">
+          <div class="pos-topbar-left">
+            <h1 class="pos-screen-title">Point of Sale</h1>
+            <span class="pos-terminal-tag">Register #01</span>
+          </div>
+          <div class="pos-topbar-right">
+            <span class="pos-screen-time" id="pos-screen-time"></span>
           </div>
         </div>
 
@@ -306,19 +367,72 @@
               </div>
             </div>
 
-            <!-- Menu item cards grid -->
+            <!-- Menu item cards grid (paginated, fixed height) -->
             <div class="pos-menu-grid" id="pos-menu-grid">
               <!-- Populated by pos.js -->
             </div>
+
+            <!-- Menu Pagination Bar -->
+            <div class="pos-pagination" id="pos-pagination">
+              <!-- Populated by pos.js: [ < ] [ 1 ] [ 2 ] [ 3 ] [ > ] -->
+            </div>
           </div>
 
-          <!-- Right: Cart / Order Summary Panel -->
+          <!-- Right: Cart / Order Summary Panel (Viewport Locked) -->
           <div class="pos-cart-panel">
             <div class="cart-header">
-              <div class="cart-header-title">Current Order</div>
+              <div class="cart-header-title">Current Order <span id="cart-item-count" class="cart-header-badge">0</span></div>
               <button class="btn btn-sm btn-secondary" onclick="clearCart()">Clear</button>
             </div>
 
+            <div class="cart-options-top">
+              <!-- Order Type Segmented Tabs -->
+              <div class="pos-order-types" id="pos-order-types">
+                <button type="button" class="pos-type-btn active" data-type="dinein" onclick="setPOSOrderType('dinein')">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+                  <span>Dine-In</span>
+                </button>
+                <button type="button" class="pos-type-btn" data-type="takeaway" onclick="setPOSOrderType('takeaway')">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                  <span>Takeaway</span>
+                </button>
+                <button type="button" class="pos-type-btn" data-type="delivery" onclick="setPOSOrderType('delivery')">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                  <span>Delivery</span>
+                </button>
+              </div>
+
+              <!-- 1. Dine-In: Table Selection -->
+              <div id="pos-table-group" class="form-group pos-compact-field">
+                <label class="form-label" style="font-size:10.5px">Dining Table</label>
+                <select id="pos-table-select" class="form-control pos-compact-input">
+                  <!-- Populated by pos.js -->
+                </select>
+              </div>
+
+              <!-- 2. Takeaway / Delivery: Customer Details -->
+              <div id="pos-customer-group" class="form-row pos-compact-row" style="display:none;">
+                <div class="form-group pos-compact-field" style="flex:1">
+                  <label class="form-label" style="font-size:10.5px">Customer Name</label>
+                  <input type="text" id="pos-customer-name" class="form-control pos-compact-input"
+                    placeholder="e.g. Ali Khan" />
+                </div>
+                <div class="form-group pos-compact-field" style="flex:1">
+                  <label class="form-label" style="font-size:10.5px">Phone</label>
+                  <input type="tel" id="pos-customer-phone" class="form-control pos-compact-input"
+                    placeholder="0300-1234567" />
+                </div>
+              </div>
+
+              <!-- 3. Delivery Address -->
+              <div id="pos-delivery-group" class="form-group pos-compact-field" style="display:none;">
+                <label class="form-label" style="font-size:10.5px">Delivery Address</label>
+                <input type="text" id="pos-delivery-address" class="form-control pos-compact-input"
+                  placeholder="Address / Area" />
+              </div>
+            </div>
+
+            <!-- Scrollable Items List (Only this internal list scrolls if > 4 items) -->
             <div class="cart-items-wrap">
               <div id="cart-empty">
                 Your cart is empty.<br>Click <strong>+ Add</strong> on menu items to begin.
@@ -328,51 +442,51 @@
               </div>
             </div>
 
+            <!-- Pinned Cart Footer: Always Visible without scrolling -->
             <div class="cart-footer">
-              <div class="cart-options">
-                <div class="form-group" style="margin-bottom:6px">
-                  <label class="form-label" style="font-size:11px">Select Table / Service</label>
-                  <select id="pos-table-select" class="form-control" style="font-size:12px;padding:6px 9px;">
-                    <!-- Populated by pos.js -->
-                  </select>
+              <div class="pos-discount-section">
+                <div class="discount-header">
+                  <span class="discount-label">Discount</span>
+                  <div class="discount-chips" id="discount-chips">
+                    <button type="button" class="chip active" onclick="applyDiscountPercent(0)">0%</button>
+                    <button type="button" class="chip" onclick="applyDiscountPercent(5)">5%</button>
+                    <button type="button" class="chip" onclick="applyDiscountPercent(10)">10%</button>
+                    <button type="button" class="chip" onclick="applyDiscountPercent(15)">15%</button>
+                  </div>
                 </div>
-
-                <div class="form-row" style="gap:8px;margin-bottom:0">
-                  <div class="form-group" style="margin-bottom:0">
-                    <label class="form-label" style="font-size:11px">Discount (PKR)</label>
-                    <input type="number" id="pos-discount" class="form-control" style="font-size:12px;padding:6px 9px;"
-                      placeholder="0" min="0" oninput="renderCart()" />
-                  </div>
-                  <div class="form-group" style="margin-bottom:0">
-                    <label class="form-label" style="font-size:11px">Order Note</label>
-                    <input type="text" id="pos-note" class="form-control" style="font-size:12px;padding:6px 9px;"
-                      placeholder="e.g. less spicy" />
-                  </div>
+                <div class="pos-cart-quick-inputs">
+                  <input type="number" id="pos-discount" class="form-control pos-input-xs"
+                    placeholder="Custom PKR" min="0" oninput="onCustomDiscountInput()" />
+                  <input type="text" id="pos-note" class="form-control pos-input-xs"
+                    placeholder="Kitchen note..." />
                 </div>
               </div>
 
-              <div class="cart-summary-row">
-                <span>Subtotal</span>
-                <span id="cart-subtotal">PKR 0</span>
-              </div>
-              <div class="cart-summary-row">
-                <span>Discount</span>
-                <span id="cart-discount">PKR 0</span>
-              </div>
-              <div class="cart-summary-row">
-                <span>Tax</span>
-                <span id="cart-tax">PKR 0 (10%)</span>
-              </div>
-              <div class="cart-summary-row grand-total">
-                <span>Total Amount</span>
-                <span id="cart-total">PKR 0</span>
+              <div class="cart-summary-totals">
+                <div class="cart-summary-row">
+                  <span>Subtotal</span>
+                  <span id="cart-subtotal">PKR 0</span>
+                </div>
+                <div class="cart-summary-row" id="cart-discount-row">
+                  <span>Discount</span>
+                  <span id="cart-discount">PKR 0</span>
+                </div>
+                <div class="cart-summary-row">
+                  <span>Tax (10%)</span>
+                  <span id="cart-tax">PKR 0</span>
+                </div>
+                <div class="cart-summary-row grand-total">
+                  <span>Total Amount</span>
+                  <span id="cart-total">PKR 0</span>
+                </div>
               </div>
 
-              <button id="pos-place-order" class="btn btn-primary" onclick="placeOrder()" disabled>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="20 6 9 17 4 12"></polyline>
+              <button id="pos-place-order" class="btn btn-primary btn-checkout" onclick="openCheckoutModal()" disabled>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                  <line x1="1" y1="10" x2="23" y2="10"></line>
                 </svg>
-                <span>Place Order</span>
+                <span>Proceed to Checkout</span>
               </button>
             </div>
           </div>
@@ -401,11 +515,22 @@
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <input type="text" id="orders-search" placeholder="Search order ID, table, item..."
+            <input type="text" id="orders-search" placeholder="Search order ID, table, item, customer..."
               oninput="ordersSearchHandler(this.value)" />
           </div>
 
-          <div class="orders-filters">
+          <div class="orders-view-switcher">
+            <button class="view-switch-btn active" id="btn-view-list" onclick="switchOrdersView('list')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+              <span>List View</span>
+            </button>
+            <button class="view-switch-btn" id="btn-view-kds" onclick="switchOrdersView('kds')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              <span>Kitchen Board (KDS)</span>
+            </button>
+          </div>
+
+          <div class="orders-filters" id="orders-filters-bar">
             <button class="order-filter-btn active" data-status="all"
               onclick="setOrdersFilter(this, 'all')">All</button>
             <button class="order-filter-btn" data-status="pending"
@@ -420,15 +545,17 @@
           </div>
         </div>
 
-        <div class="orders-table-wrap">
+        <!-- 1. List View Table -->
+        <div class="orders-table-wrap" id="orders-table-wrap">
           <div class="orders-table-scroll">
             <table class="data-table">
               <thead>
                 <tr>
                   <th>Order ID</th>
-                  <th>Table</th>
+                  <th>Type &amp; Table/Customer</th>
                   <th>Items Summary</th>
-                  <th>Date & Time</th>
+                  <th>Date &amp; Time</th>
+                  <th>Payment</th>
                   <th>Total</th>
                   <th>Status</th>
                   <th>Actions</th>
@@ -439,6 +566,11 @@
               </tbody>
             </table>
           </div>
+        </div>
+
+        <!-- 2. Kitchen Display System (KDS) Cards Grid -->
+        <div id="orders-kds-view" class="kds-grid" style="display:none;">
+          <!-- Populated by orders.js -->
         </div>
       </section>
 
@@ -484,6 +616,13 @@
             <h1 class="page-title">Tables Management</h1>
             <p class="page-subtitle">Real-time floor seating overview and status manager</p>
           </div>
+          <button class="btn btn-primary" onclick="openAddTableModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Add Table</span>
+          </button>
         </div>
 
         <!-- Summary row -->
@@ -560,7 +699,23 @@
           </div>
         </div>
 
-        <div class="top-items-card">
+        <!-- Payment & Category Breakdowns -->
+        <div class="analytics-charts-grid" style="margin-top:16px;">
+          <div class="chart-container">
+            <div class="chart-container-title">Payment Method Distribution</div>
+            <div id="analytics-payment-breakdown" style="padding-top:10px;">
+              <!-- Populated by analytics.js -->
+            </div>
+          </div>
+          <div class="chart-container">
+            <div class="chart-container-title">Category Sales Breakdown</div>
+            <div id="analytics-category-breakdown" style="padding-top:10px;">
+              <!-- Populated by analytics.js -->
+            </div>
+          </div>
+        </div>
+
+        <div class="top-items-card" style="margin-top:16px;">
           <div class="card-header" style="border:none;padding:0 0 14px 0">
             <span class="card-header-title">Top Selling Menu Items</span>
           </div>
@@ -613,6 +768,30 @@
               <span>Save Settings</span>
             </button>
           </form>
+        </div>
+
+        <div class="settings-form-card" style="margin-top:20px">
+          <div class="settings-section-title">Data Management &amp; Backup</div>
+          <p style="font-size:13px;color:var(--gray-500);margin-bottom:16px;line-height:1.5;">
+            Export your entire restaurant database (menu, orders, tables, settings) to a portable JSON backup file, restore previous backups, or reset back to default demo data.
+          </p>
+          <div class="settings-backup-actions">
+            <button type="button" class="btn btn-secondary" onclick="exportBackup()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Export Backup (JSON)</span>
+            </button>
+
+            <label class="btn btn-secondary" style="margin:0;cursor:pointer;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              <span>Import Backup (JSON)</span>
+              <input type="file" id="backup-file-input" accept=".json" onchange="importBackup(event)" style="display:none;" />
+            </label>
+
+            <button type="button" class="btn btn-danger" onclick="resetAllData()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><polyline points="23 20 23 14 17 14"></polyline><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path></svg>
+              <span>Reset to Demo Data</span>
+            </button>
+          </div>
         </div>
       </section>
 
@@ -699,13 +878,14 @@
 
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label" for="menu-form-category">Category</label>
-            <select id="menu-form-category" class="form-control" required>
-              <option value="Burgers">Burgers</option>
-              <option value="Pizza">Pizza</option>
-              <option value="Drinks">Drinks</option>
-              <option value="Desserts">Desserts</option>
-            </select>
+            <label class="form-label" for="menu-form-category">Category (Select or Type New)</label>
+            <input type="text" id="menu-form-category" list="menu-categories-datalist" class="form-control" placeholder="e.g. Burgers, Starters..." required />
+            <datalist id="menu-categories-datalist">
+              <option value="Burgers"></option>
+              <option value="Pizza"></option>
+              <option value="Drinks"></option>
+              <option value="Desserts"></option>
+            </datalist>
           </div>
           <div class="form-group">
             <label class="form-label" for="menu-form-price">Price (PKR)</label>
@@ -775,6 +955,11 @@
           </div>
         </div>
 
+        <div id="invoice-customer-wrap" class="invoice-customer-wrap" style="display:none;margin-bottom:12px;font-size:12px;background:#f8fafc;padding:8px 10px;border-radius:6px;border:1px solid #e2e8f0;">
+          <div><strong>Customer:</strong> <span id="invoice-customer-name">—</span> (<span id="invoice-customer-phone">—</span>)</div>
+          <div id="invoice-address-line" style="display:none;color:#64748b;margin-top:2px;"><strong>Address:</strong> <span id="invoice-delivery-address"></span></div>
+        </div>
+
         <table class="data-table" style="margin-bottom:10px">
           <thead>
             <tr>
@@ -798,6 +983,54 @@
           <div class="invoice-total-row"><span>Discount:</span><span id="invoice-discount">PKR 0</span></div>
           <div class="invoice-total-row"><span>Sales Tax:</span><span id="invoice-tax">PKR 0</span></div>
           <div class="invoice-total-row grand"><span>Net Total:</span><span id="invoice-total">PKR 0</span></div>
+          <div class="invoice-total-row" id="invoice-payment-method-row" style="margin-top:4px;border-top:1px dashed #cbd5e1;padding-top:4px;">
+            <span>Payment Method:</span><span id="invoice-payment-method" style="font-weight:600;text-transform:capitalize;">Cash</span>
+          </div>
+          <div class="invoice-total-row" id="invoice-tendered-row">
+            <span>Cash Tendered:</span><span id="invoice-tendered">PKR 0</span>
+          </div>
+          <div class="invoice-total-row" id="invoice-change-row">
+            <span>Change Returned:</span><strong id="invoice-change">PKR 0</strong>
+          </div>
+        </div>
+
+        <div class="invoice-barcode-wrap" style="text-align:center;margin-top:14px;padding-top:10px;border-top:1px dashed #cbd5e1;">
+          <div style="font-size:10px;letter-spacing:1px;color:#94a3b8;margin-bottom:4px;">VERIFIED POS TRANSACTION</div>
+          <svg width="180" height="34" viewBox="0 0 180 34" style="margin:0 auto;display:block;">
+            <rect x="0" y="0" width="3" height="34" fill="#1e293b"/>
+            <rect x="5" y="0" width="2" height="34" fill="#1e293b"/>
+            <rect x="10" y="0" width="4" height="34" fill="#1e293b"/>
+            <rect x="16" y="0" width="1" height="34" fill="#1e293b"/>
+            <rect x="20" y="0" width="3" height="34" fill="#1e293b"/>
+            <rect x="26" y="0" width="2" height="34" fill="#1e293b"/>
+            <rect x="30" y="0" width="5" height="34" fill="#1e293b"/>
+            <rect x="38" y="0" width="2" height="34" fill="#1e293b"/>
+            <rect x="43" y="0" width="3" height="34" fill="#1e293b"/>
+            <rect x="49" y="0" width="1" height="34" fill="#1e293b"/>
+            <rect x="53" y="0" width="4" height="34" fill="#1e293b"/>
+            <rect x="60" y="0" width="2" height="34" fill="#1e293b"/>
+            <rect x="65" y="0" width="3" height="34" fill="#1e293b"/>
+            <rect x="71" y="0" width="5" height="34" fill="#1e293b"/>
+            <rect x="79" y="0" width="1" height="34" fill="#1e293b"/>
+            <rect x="83" y="0" width="4" height="34" fill="#1e293b"/>
+            <rect x="90" y="0" width="2" height="34" fill="#1e293b"/>
+            <rect x="95" y="0" width="3" height="34" fill="#1e293b"/>
+            <rect x="101" y="0" width="1" height="34" fill="#1e293b"/>
+            <rect x="105" y="0" width="4" height="34" fill="#1e293b"/>
+            <rect x="112" y="0" width="3" height="34" fill="#1e293b"/>
+            <rect x="118" y="0" width="2" height="34" fill="#1e293b"/>
+            <rect x="123" y="0" width="5" height="34" fill="#1e293b"/>
+            <rect x="131" y="0" width="1" height="34" fill="#1e293b"/>
+            <rect x="135" y="0" width="3" height="34" fill="#1e293b"/>
+            <rect x="141" y="0" width="4" height="34" fill="#1e293b"/>
+            <rect x="148" y="0" width="2" height="34" fill="#1e293b"/>
+            <rect x="153" y="0" width="3" height="34" fill="#1e293b"/>
+            <rect x="159" y="0" width="2" height="34" fill="#1e293b"/>
+            <rect x="164" y="0" width="4" height="34" fill="#1e293b"/>
+            <rect x="171" y="0" width="2" height="34" fill="#1e293b"/>
+            <rect x="176" y="0" width="3" height="34" fill="#1e293b"/>
+          </svg>
+          <div id="invoice-barcode-number" style="font-family:monospace;font-size:11px;color:#64748b;letter-spacing:2px;margin-top:3px;">ORD-000</div>
         </div>
 
         <div class="invoice-footer">
@@ -817,6 +1050,124 @@
           <span>Print Receipt</span>
         </button>
       </div>
+    </div>
+
+    <!-- 4. POS Payment & Checkout Modal -->
+    <div id="modal-checkout" class="modal" style="display:none;max-width:540px;">
+      <div class="modal-header">
+        <div class="modal-title">Payment &amp; Final Checkout</div>
+        <button class="modal-close" onclick="closeModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="checkout-summary-box">
+        <div class="checkout-summary-col">
+          <span class="checkout-summary-label">Order Type</span>
+          <strong id="checkout-order-type">Dine-In</strong>
+        </div>
+        <div class="checkout-summary-col">
+          <span class="checkout-summary-label">Table / Customer</span>
+          <strong id="checkout-target-desc">Table 1</strong>
+        </div>
+        <div class="checkout-summary-col">
+          <span class="checkout-summary-label">Total Payable</span>
+          <strong id="checkout-total-payable" class="checkout-grand-text">PKR 0</strong>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:14px;">
+        <label class="form-label" style="font-size:12px;">Select Payment Method</label>
+        <div class="payment-method-selector">
+          <label class="pay-method-card active" id="pay-card-cash">
+            <input type="radio" name="pay-method" value="cash" checked onchange="onPaymentMethodChange('cash')" />
+            <div class="pay-method-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg>
+            </div>
+            <div class="pay-method-title">Cash</div>
+          </label>
+          <label class="pay-method-card" id="pay-card-card">
+            <input type="radio" name="pay-method" value="card" onchange="onPaymentMethodChange('card')" />
+            <div class="pay-method-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+            </div>
+            <div class="pay-method-title">Card / POS</div>
+          </label>
+          <label class="pay-method-card" id="pay-card-online">
+            <input type="radio" name="pay-method" value="online" onchange="onPaymentMethodChange('online')" />
+            <div class="pay-method-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+            </div>
+            <div class="pay-method-title">Online / UPI</div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Cash Tendered section -->
+      <div id="checkout-cash-section" class="checkout-cash-box">
+        <div class="form-group" style="margin-bottom:8px;">
+          <label class="form-label" style="font-size:11px;">Cash Received / Tendered (PKR)</label>
+          <input type="number" id="checkout-cash-tendered" class="form-control" style="font-size:16px;font-weight:700;padding:8px 12px;" placeholder="0" oninput="calculateChangeDue()" />
+        </div>
+        <div class="cash-quick-chips">
+          <button type="button" class="cash-chip" onclick="quickCashTender('exact')">Exact</button>
+          <button type="button" class="cash-chip" onclick="quickCashTender(100)">+100</button>
+          <button type="button" class="cash-chip" onclick="quickCashTender(500)">+500</button>
+          <button type="button" class="cash-chip" onclick="quickCashTender(1000)">+1,000</button>
+          <button type="button" class="cash-chip" onclick="quickCashTender(5000)">+5,000</button>
+        </div>
+        <div class="change-due-banner" id="change-due-banner">
+          <span>Change Returned:</span>
+          <strong id="checkout-change-due">PKR 0</strong>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" id="btn-confirm-payment" onclick="processOrderCheckout()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Complete Order &amp; Pay</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 5. Table Action & Settle Modal -->
+    <div id="modal-table-action" class="modal" style="display:none;max-width:520px;">
+      <div class="modal-header">
+        <div class="modal-title" id="table-action-title">Table Details</div>
+        <button class="modal-close" onclick="closeModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div id="table-action-body">
+        <!-- Dynamically injected by tables.js -->
+      </div>
+    </div>
+
+    <!-- 6. Add Table Modal -->
+    <div id="modal-table-form" class="modal" style="display:none;max-width:440px;">
+      <div class="modal-header">
+        <div class="modal-title">Add Dining Table</div>
+        <button class="modal-close" onclick="closeModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <form id="table-add-form" onsubmit="saveNewTable(event)">
+        <div class="form-group">
+          <label class="form-label" for="table-form-name">Table Name / Identifier</label>
+          <input type="text" id="table-form-name" class="form-control" placeholder="e.g. Table 13 or Rooftop 1" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="table-form-seats">Seat Capacity</label>
+          <input type="number" id="table-form-seats" class="form-control" placeholder="4" min="1" max="50" required />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Table</button>
+        </div>
+      </form>
     </div>
 
   </div>

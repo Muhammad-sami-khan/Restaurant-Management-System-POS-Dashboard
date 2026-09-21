@@ -151,17 +151,30 @@ function generateSeedOrders() {
     date.setDate(date.getDate() - order.daysAgo);
     date.setHours(10 + Math.floor(Math.random() * 11), Math.floor(Math.random() * 60), 0, 0);
 
+    const paymentMethods = ['cash', 'card', 'online', 'cash', 'card'];
+    const paymentMethod = paymentMethods[i % paymentMethods.length];
+    const orderTypes = ['dinein', 'dinein', 'takeaway', 'dinein', 'delivery'];
+    const orderType = order.table ? 'dinein' : orderTypes[i % orderTypes.length];
+    const customerNames = ['Ali Khan', 'Fatima Zahra', 'Usman Tariq', 'Ayesha Malik', 'Bilal Ahmed'];
+
     return {
       id: `ORD-${String(i + 1).padStart(3, '0')}`,
-      tableId: order.table,
-      tableName: `Table ${order.table.replace('t', '')}`,
+      orderType,
+      tableId: orderType === 'dinein' ? order.table : '',
+      tableName: orderType === 'dinein' ? `Table ${order.table.replace('t', '')}` : (orderType === 'takeaway' ? 'Takeaway' : 'Delivery'),
+      customerName: orderType !== 'dinein' ? customerNames[i % customerNames.length] : '',
+      customerPhone: orderType !== 'dinein' ? `03${Math.floor(100000000 + Math.random() * 900000000).toString().slice(0, 9)}` : '',
+      deliveryAddress: orderType === 'delivery' ? 'Street 14, Block B, DHA Lahore' : '',
       items: order.items,
       subtotal, tax, discount: 0, total,
+      paymentMethod,
+      amountTendered: paymentMethod === 'cash' ? Math.ceil(total / 500) * 500 : total,
+      changeDue: paymentMethod === 'cash' ? (Math.ceil(total / 500) * 500) - total : 0,
       status: order.status,
       createdAt: date.toISOString(),
       note: '',
     };
-  }); 
+  });
 }
 
 // load data on page load

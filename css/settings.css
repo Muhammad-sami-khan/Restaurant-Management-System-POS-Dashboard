@@ -1,26 +1,60 @@
 /* ============================================
-   Settings Page — Single column, clean form
+   Settings Page — Modern Preferences Panel
    ============================================ */
 
 .settings-form-card {
-  background: #fff;
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius);
-  padding: 24px;
-  max-width: 560px;
-  box-shadow: var(--shadow-xs);
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  max-width: 620px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
 }
 
 .settings-section-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--gray-700);
-  margin-bottom: 16px;
-  padding-bottom: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 18px;
+  padding-bottom: 10px;
   border-bottom: 1px solid var(--gray-100);
-  letter-spacing: 0.2px;
+  letter-spacing: -0.2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .settings-section-title + .settings-section-title {
-  margin-top: 20px;
+  margin-top: 28px;
+}
+
+.settings-backup-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.settings-backup-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+}
+
+.settings-danger-box {
+  background: #FEF2F2;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-top: 8px;
+}
+
+.settings-danger-text {
+  font-size: 12px;
+  color: #991B1B;
+  margin-bottom: 12px;
+  line-height: 1.5;
 }

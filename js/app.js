@@ -38,6 +38,14 @@ function navigateTo(pageId) {
 
   pages[pageId]();
 
+  // Reset scroll and lock pos viewport if on POS
+  window.scrollTo(0, 0);
+  const mainEl = document.getElementById('main-content');
+  if (mainEl) {
+    mainEl.scrollTop = 0;
+    mainEl.classList.toggle('pos-active', pageId === 'pos');
+  }
+
   // close mobile menu
   if (window.innerWidth <= 768) {
     document.getElementById('sidebar').classList.remove('open');
